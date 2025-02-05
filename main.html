@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Input Table</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background: url('https://cdn.vectorstock.com/i/500p/19/19/blue-mountain-landscape-mountains-misty-vector-26211919.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+            text-align: center;
+            position: relative;
+
+        }
+        h2 {
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #F9E076;
+            border-radius: 10px;
+            
+            overflow: hidden;
+            color: #0492C2;
+        }
+
+        th,
+        td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+
+        form {
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            }
+
+        input[type="text"],
+        input[type="number"] {
+            padding: 5px;
+            margin: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            outline: none;
+            }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            background-color: rgba(255, 255, 255, 0.7);
+            color: #007BFF;
+            font-size: 16px;
+            transition: background-color 0.3s;
+            border-radius: 10px;
+        }
+
+        button:hover {
+            background-color: rgba(255, 255, 255, 1);
+        }
+
+        img {
+            display: block;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <button onclick="window.location.href='https://www.volunteermatch.org/'">VolunteerMatch Volunteer Opportunities</button>
+    <h1>Volunteer Hours Log</h1>
+    <form id="inputForm">
+        <label for="textInput">Organization:</label>
+        <input type="text" id="textInput" required>
+        <label for="numberInput">Hours:</label>
+        <input type="number" id="numberInput" required>
+        <button type="submit">Add</button>
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>Organizations</th>
+                <th>Hours</th>
+            </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+        <tfoot>
+            <tr>
+                <td><strong>Total Hours</strong></td>
+                <td id="sum">0</td>
+            </tr>
+        </tfoot>
+    </table>
+    <img id="sumImage" src="" alt="" style="display: none;">
+    <script>
+        document.getElementById('inputForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+            const textInput = document.getElementById('textInput').value;
+            const numberInput = parseFloat(document.getElementById('numberInput').value);
+            const tableBody = document.getElementById('tableBody');
+            const newRow = document.createElement('tr');
+            const textCell = document.createElement('td');
+            const numberCell = document.createElement('td');
+
+            textCell.textContent = textInput;
+            numberCell.textContent = numberInput;
+            newRow.appendChild(textCell);
+            newRow.appendChild(numberCell);
+            tableBody.appendChild(newRow);
+
+            const sumElement = document.getElementById('sum');
+            const currentSum = parseFloat(sumElement.textContent);
+            const newSum = currentSum + numberInput;
+            sumElement.textContent = newSum;
+
+            const sumImage = document.getElementById('sumImage');
+            if (newSum >= 50 && newSum < 100) {
+                sumImage.src = 'https://static.vecteezy.com/system/resources/thumbnails/009/313/578/small_2x/number-50-gold-3d-png.png';
+                sumImage.style.display = 'block';
+            } else if (newSum >= 100 && newSum < 500) {
+                sumImage.src = 'https://static.vecteezy.com/system/resources/thumbnails/011/287/829/small/number-100-3d-png.png';
+                sumImage.style.display = 'block';
+            } else if (newSum >= 500 && newSum < 1000) {
+                sumImage.src = 'https://static.vecteezy.com/system/resources/thumbnails/008/490/125/small_2x/five-hundred-golden-number-500-anniversary-birthday-price-png.png';
+                sumImage.style.display = 'block';
+            } else if (newSum >= 1000) {
+                sumImage.src = 'https://static.vecteezy.com/system/resources/thumbnails/008/490/534/small_2x/one-thousand-golden-number-1000-anniversary-birthday-price-png.png';
+                sumImage.style.display = 'block';
+            } else {
+                sumImage.style.display = 'none';
+            }
+
+            document.getElementById('inputForm').reset();
+        });
+    </script>
+</body>
+</html>
