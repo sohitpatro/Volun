@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        background: url('https://cdn.vectorstock.com/i/500p/19/19/blue-mountain-landscape-mountains-misty-vector-26211919.jpg') no-repeat center center fixed;
+        background-size: cover;
+        color: white;
+        height: 100vh;
+        text-align: center;
+        position: relative;
+
+
+
+    }
+        h2 {
+            text-align: center;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            background-color: rgba(255, 255, 255, 0.7);
+            
+            color: #007BFF;
+            font-size: 16px;
+            transition: background-color 0.3s;
+            border-radius: 10px;
+            margin: 10px;
+
+        }
+
+        button:hover {
+            background-color: rgba(255, 255, 255, 1);
+          
+
+
+        }
+        input[type="text"],
+        input[type="password"] {
+        padding: 5px;
+        margin: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        outline: none;
+        }
+        
+        </style>
+</head>
+<body>
+    <h2>Login</h2>
+    <input type="text" id="login-username" placeholder="Username" required>
+    <input type="password" id="login-password" placeholder="Password" required>
+    <button onclick="login()">Login</button>
+
+    <script>
+        function login() {
+            var username = document.getElementById("login-username").value;
+            var password = document.getElementById("login-password").value;
+
+            var storedUsername = localStorage.getItem("username");
+            var storedPassword = localStorage.getItem("password");
+
+            if (username === storedUsername && password === storedPassword) {
+                window.location.href = 'main.html';
+            } else {
+                alert("Invalid username or password.");
+            }
+        }
+    </script>
+</body>
+</html>
